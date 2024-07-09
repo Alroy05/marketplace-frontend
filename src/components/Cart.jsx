@@ -35,17 +35,18 @@ const Cart = ({ products, setProducts }) => {
   const totalCost = cartItems.reduce((total, item) => total + item.price, 0);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-[#3a210e] via-[#131111] to-[#3a210e] font-tenorSans">
+    <div className="min-h-screen flex items-start pt-10 justify-center bg-gradient-to-tr from-[#3a210e] via-[#131111] to-[#3a210e] font-tenorSans">
       <div className="w-full max-w-md bg-[#131111] p-8 rounded-xl shadow-lg">
         <h1 className="text-3xl font-bold text-[#9f5f2d] mb-6">Cart</h1>
         {
+          cartItems.length !== 0 ?
           cartItems.map(item => (
           <div key={item.id} className="flex justify-between items-center mb-4">
             <div>
               <p className="text-[#ebcfbf] font-semibold">{item.title}</p>
               <div className="flex items-center">
                 <FaEthereum className="text-lg mr-1 text-[#9f5f2d]" />
-                <p className="text-[#9f5f2d]">${item.price}</p>
+                <p className="text-[#9f5f2d]">{item.price}</p>
               </div>
             </div>
             <button 
@@ -55,7 +56,9 @@ const Cart = ({ products, setProducts }) => {
               Remove
             </button>
           </div>
-        ))
+        )) : <p className='text-[#ebcfbf]'>
+          No Items in Cart
+        </p>
         }
         <hr className="border-gray-600 mb-4" />
         <div className="flex justify-between items-center mb-6">

@@ -27,7 +27,7 @@ const AddProduct = ({ setProducts }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-[#3a210e] via-[#131111] to-[#3a210e] font-tenorSans">
+    <div className="min-h-screen flex items-start pt-10 justify-center bg-gradient-to-tr from-[#3a210e] via-[#131111] to-[#3a210e] font-tenorSans">
       <div className="w-full max-w-md p-8 rounded-xl bg-[#131111] shadow-lg">
         <h1 className="text-3xl font-bold text-[#9f5f2d] mb-6">Add Artwork</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
