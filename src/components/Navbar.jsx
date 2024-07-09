@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
+import { AiOutlineClose, AiOutlineShoppingCart, AiOutlineAppstoreAdd } from 'react-icons/ai';
+import { MdOutlineExplore } from "react-icons/md";
+import { RiProductHuntLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
+
 const Navbar = () => {
   // State to manage the navbar's visibility
   const [nav, setNav] = useState(false);
@@ -12,57 +15,42 @@ const Navbar = () => {
 
   // Array containing navigation items
   const navItems = [
-    { id: 1, text: 'Products', link: '/' },
-    { id: 2, text: 'Cart' , link: 'view-cart'},
+    { id: 1, text: 'Explore', link: '/', icon: <MdOutlineExplore size={20} /> },
+    { id: 2, text: 'Create', link: '/add-product', icon: <AiOutlineAppstoreAdd size={20} /> },
+    { id: 3, text: 'Cart', link: '/view-cart', icon: <AiOutlineShoppingCart size={20} /> },
   ];
 
   return (
-    <div className='bg-white flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-black'>
-      {/* Logo */}
-      <h1 className='w-full text-3xl font-bold text-[#00df9a]'>Arizon</h1>
+    <div className="sticky top-0 z-50 bg-[#1b0f07]/30 backdrop-blur-md  shadow-lg font-tenorSans">
+      <div className="relative flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-black">
+        {/* Logo */}
+        <h1 className="hidden md:flex w-full text-3xl font-bold text-[#9f5f2d]">Al Pereira's</h1>
 
-      {/* Desktop Navigation */}
-      <ul className='hidden md:flex'>
-        {navItems.map(item => (
-          <Link to={item.link}>
-            <li
-              key={item.id}
-              className='p-4 hover:bg-[#00df9a] rounded-xl m-2 cursor-pointer duration-300 hover:text-black'
-            >
-              {item.text}
-            </li>
-          </Link>
-        ))}
-      </ul>
+        {/* Desktop Navigation */}
+        <ul className="hidden md:flex">
+          {navItems.map((item) => (
+            <Link to={item.link} key={item.id}>
+              <li className="flex items-center font-bold p-4 text-[#b89785] rounded-xl m-2 cursor-pointer duration-300 hover:text-[#9f5f2d]">
+                {item.icon}
+                <span className="ml-2">{item.text}</span>
+              </li>
+            </Link>
+          ))}
+        </ul>
 
-      {/* Mobile Navigation Icon */}
-      <div onClick={handleNav} className='block md:hidden'>
-        {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
+        {/* Mobile Navigation Menu */}
+        <h1 className="w-full text-2xl font-bold text-[#9f5f2d] md:hidden">Al Pereira's</h1>
+
+        <ul className="flex md:hidden">
+          {navItems.map((item) => (
+            <Link to={item.link} key={item.id}>
+              <li className="flex items-center p-4 text-[#b89785] rounded-xl m-2 cursor-pointer duration-300 hover:text-[#9f5f2d]">
+                {item.icon}
+              </li>
+            </Link>
+          ))}
+        </ul>
       </div>
-
-      {/* Mobile Navigation Menu */}
-      <ul
-        className={
-          nav
-            ? 'fixed md:hidden left-0 top-0 w-[60%] h-full border-r border-white bg-white ease-in-out duration-500'
-            : 'ease-in-out w-[60%] duration-500 fixed top-0 bottom-0 left-[-100%]'
-        }
-      >
-        {/* Mobile Logo */}
-        <h1 className='w-full text-3xl font-bold text-[#00df9a] m-4'>Arizon</h1>
-
-        {/* Mobile Navigation Items */}
-        {navItems.map(item => (
-          <Link to={item.link}>
-            <li
-              key={item.id}
-              className='p-4 border-b rounded-xl hover:bg-[#00df9a] duration-300 hover:text-black cursor-pointer'
-            >
-              {item.text}
-            </li>
-          </Link>
-        ))}
-      </ul>
     </div>
   );
 };
